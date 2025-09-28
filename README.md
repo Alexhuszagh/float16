@@ -1,6 +1,6 @@
 # float16
 
-This a fork of [half](https://crates.io/crates/half/), which removes most dependencies and fixing minor correctness issues. This has no affiliation to half.
+This a fork of [half](https://crates.io/crates/half/), which removes most dependencies and fixing minor correctness issues (at a minor performance penalty). This has no affiliation to [`half`].
 
 <!-- Rebased as of half-rs@62f1141 -->
 
