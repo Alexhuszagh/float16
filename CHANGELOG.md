@@ -5,12 +5,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Removed
+
+- `doc_auto_cfg` feature has been removed from docs.rs documentation due to removal of rust
+  feature.
+
 ## [0.1.4][v0.1.4] - 2024-12-21 <a name="0.1.4"></a>
 
 ### Fixed
 
 - `min` and `max` incorrectly propagate `NaN` values when `self` is `NaN`. Fixes [#126],
   by [@mgottscho].
+- Suppressed warnings from new `unnecessary_transmutes` lint.
 
 ## [0.1.3][v0.1.3] - 2024-12-21 <a name="0.1.3"></a>
 
@@ -492,6 +498,9 @@ These were all changes for half, which `float16` is a fork of.
 [@eiz]: https://github.com/eiz
 [@comath]: https://github.com/comath
 [@mgottscho]: https://github.com/mgottscho
+[@djsell]: https://github.com/djsell
+[@heiher]: https://github.com/heiher
+[@majian4work]: https://github.com/majian4work
 
 <!-- Versions -->
 
