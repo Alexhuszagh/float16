@@ -5,6 +5,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.1.5][v0.1.5] - 2024-12-21 <a name="0.1.5"></a>
+
 ### Removed
 
 - `doc_auto_cfg` feature has been removed from docs.rs documentation due to removal of rust
@@ -472,7 +474,6 @@ These were all changes for half, which `float16` is a fork of.
 [#100]: https://github.com/starkat99/half-rs/issues/100
 [#103]: https://github.com/starkat99/half-rs/issues/103
 [#107]: https://github.com/starkat99/half-rs/issues/107
-[#110]: https://github.com/starkat99/half-rs/issues/110
 [#126]: https://github.com/starkat99/half-rs/issues/126
 
 <!-- Contributors -->
@@ -498,13 +499,11 @@ These were all changes for half, which `float16` is a fork of.
 [@eiz]: https://github.com/eiz
 [@comath]: https://github.com/comath
 [@mgottscho]: https://github.com/mgottscho
-[@djsell]: https://github.com/djsell
-[@heiher]: https://github.com/heiher
-[@majian4work]: https://github.com/majian4work
 
 <!-- Versions -->
 
 [Unreleased]: https://github.com/starkat99/half-rs/compare/v2.4.1...HEAD
+[v0.1.5]: https://github.com/Alexhuszagh/float16/compare/v0.1.4...v0.1.5
 [v0.1.4]: https://github.com/Alexhuszagh/float16/compare/v0.1.3...v0.1.4
 [v0.1.3]: https://github.com/Alexhuszagh/float16/compare/v0.1.2...v0.1.3
 [v0.1.2]: https://github.com/Alexhuszagh/float16/compare/v0.1.1...v0.1.2

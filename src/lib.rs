@@ -62,7 +62,7 @@
 //! [`bfloat16`]: https://en.wikipedia.org/wiki/Bfloat16_floating-point_format
 #![allow(clippy::verbose_bit_mask, clippy::cast_lossless, unexpected_cfgs)]
 #![cfg_attr(not(feature = "std"), no_std)]
-#![doc(html_root_url = "https://docs.rs/float16/0.1.3")]
+#![doc(html_root_url = "https://docs.rs/float16/0.1.5")]
 #![doc(test(attr(deny(warnings), allow(unused))))]
 // Until updated to use newly stabilized `from_bits`, disable new lint warning about the transmutes
 #![allow(unknown_lints, unnecessary_transmutes)]
