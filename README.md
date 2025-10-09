@@ -2,7 +2,7 @@
 
 This a fork of [half](https://crates.io/crates/half/), which removes most dependencies and fixing minor correctness issues (at a minor performance penalty). This has no affiliation to [`half`].
 
-<!-- Rebased as of half-rs@62f1141 -->
+<!-- Rebased as of half-rs@679d009 -->
 
 [![Crates.io](https://img.shields.io/crates/v/float16.svg)](https://crates.io/crates/float16/) [![Documentation](https://docs.rs/float16/badge.svg)](https://docs.rs/float16/) ![Crates.io](https://img.shields.io/crates/l/half) [![Build status](https://github.com/Alexhuszagh/float16/actions/workflows/rust.yml/badge.svg?branch=main&event=push)](https://github.com/Alexhuszagh/float16/actions/workflows/rust.yml)
 
