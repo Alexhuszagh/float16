@@ -12,7 +12,7 @@ This is a minimal variant which removes some features and introduce many build d
 
 ## Usage
 
-The `f16` and `bf16` types attempt to match existing Rust floating point type functionality where possible, and provides both conversion operations (such as to/from `f32` and `f64`) and basic arithmetic operations. Hardware support for these operations will be used whenever hardware support is available—either through instrinsics or targeted assembly—although a nightly Rust toolchain may be required for some hardware.
+The `f16` and `bf16` types attempt to match existing Rust floating point type functionality where possible, and provides both conversion operations (such as to/from `f32` and `f64`) and basic arithmetic operations. Hardware support for these operations will be used whenever hardware support is available—either through intrinsics or targeted assembly—although a nightly Rust toolchain may be required for some hardware.
 
 This crate provides [`no_std`](https://rust-embedded.github.io/book/intro/no-std.html) support so can easily be used in embedded code where a smaller float format is most useful.
 

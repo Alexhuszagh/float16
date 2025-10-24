@@ -33,11 +33,11 @@
 //! # Hardware support
 //!
 //! Hardware support for these conversions and arithmetic will be used
-//! whenever hardware support is available—either through instrinsics or
+//! whenever hardware support is available—either through intrinsics or
 //! targeted assembly—although a nightly Rust toolchain may be required for some
 //! hardware. When hardware supports it the functions and traits
 //! [`HalfBitsSliceExt`] and [`HalfFloatSliceExt`] are used it
-//! will also use vectorized SIMD intructions for increased efficiency.
+//! will also use vectorized SIMD instructions for increased efficiency.
 //!
 //! The following list details hardware support for floating point types in this
 //! crate. When using `std` cargo feature, runtime CPU target detection will be
