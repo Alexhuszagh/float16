@@ -2,7 +2,7 @@
 name = "float16"
 # Remember to keep in sync with html_root_url crate attribute
 version = "0.1.6"
-authors = ["Kathryn Long <squeeself@gmail.com>", "Alex Huszagh <ahuszagh@gmail.com>"]
+authors = ["Kathryn Long <voidstarkat@robothearts.ca>", "Alex Huszagh <ahuszagh@gmail.com>"]
 description = "Half-precision floating point f16 and bf16 types for Rust implementing the IEEE 754-2008 standard binary16 and bfloat16 types."
 repository = "https://github.com/Alexhuszagh/float16"
 readme = "README.md"
@@ -19,6 +19,7 @@ exclude = [
     "Makefile.toml",
     "clippy.toml",
     "rustfmt.toml",
+    ".mailmap",
 ]
 
 [features]
