@@ -1,3 +1,4 @@
+#![feature(stdarch_loongarch)]
 //! A crate that provides support for half-precision 16-bit floating point
 //! types.
 //!
