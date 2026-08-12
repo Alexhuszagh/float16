@@ -1569,8 +1569,8 @@ mod test {
         let digits = ((f16::MANTISSA_DIGITS as f32 - 1.0) * 2f32.log10()).floor() as u32;
         assert_eq!(f16::DIGITS, digits);
         // sanity check to show test is good
-        let digits32 = ((core::f32::MANTISSA_DIGITS as f32 - 1.0) * 2f32.log10()).floor() as u32;
-        assert_eq!(core::f32::DIGITS, digits32);
+        let digits32 = ((f32::MANTISSA_DIGITS as f32 - 1.0) * 2f32.log10()).floor() as u32;
+        assert_eq!(f32::DIGITS, digits32);
 
         // EPSILON
         let one = f16::from_f32(1.0);
@@ -1580,7 +1580,7 @@ mod test {
         // sanity check to show test is good
         let one_plus_epsilon32 = f32::from_bits(1.0f32.to_bits() + 1);
         let epsilon32 = one_plus_epsilon32 - 1f32;
-        assert_eq!(core::f32::EPSILON, epsilon32);
+        assert_eq!(f32::EPSILON, epsilon32);
 
         // MAX, MIN and MIN_POSITIVE
         let max = f16::from_bits(f16::INFINITY.to_bits() - 1);
@@ -1590,12 +1590,12 @@ mod test {
         assert_eq!(f16::MIN, min);
         assert_eq!(f16::MIN_POSITIVE, min_pos);
         // sanity check to show test is good
-        let max32 = f32::from_bits(core::f32::INFINITY.to_bits() - 1);
-        let min32 = f32::from_bits(core::f32::NEG_INFINITY.to_bits() - 1);
-        let min_pos32 = 2f32.powi(core::f32::MIN_EXP - 1);
-        assert_eq!(core::f32::MAX, max32);
-        assert_eq!(core::f32::MIN, min32);
-        assert_eq!(core::f32::MIN_POSITIVE, min_pos32);
+        let max32 = f32::from_bits(f32::INFINITY.to_bits() - 1);
+        let min32 = f32::from_bits(f32::NEG_INFINITY.to_bits() - 1);
+        let min_pos32 = 2f32.powi(f32::MIN_EXP - 1);
+        assert_eq!(f32::MAX, max32);
+        assert_eq!(f32::MIN, min32);
+        assert_eq!(f32::MIN_POSITIVE, min_pos32);
 
         // MIN_10_EXP and MAX_10_EXP
         let ten_to_min = 10f32.powi(f16::MIN_10_EXP);
@@ -1605,12 +1605,12 @@ mod test {
         assert!(ten_to_max < f16::MAX.to_f32());
         assert!(ten_to_max * 10.0 > f16::MAX.to_f32());
         // sanity check to show test is good
-        let ten_to_min32 = 10f64.powi(core::f32::MIN_10_EXP);
-        assert!(ten_to_min32 / 10.0 < f64::from(core::f32::MIN_POSITIVE));
-        assert!(ten_to_min32 > f64::from(core::f32::MIN_POSITIVE));
-        let ten_to_max32 = 10f64.powi(core::f32::MAX_10_EXP);
-        assert!(ten_to_max32 < f64::from(core::f32::MAX));
-        assert!(ten_to_max32 * 10.0 > f64::from(core::f32::MAX));
+        let ten_to_min32 = 10f64.powi(f32::MIN_10_EXP);
+        assert!(ten_to_min32 / 10.0 < f64::from(f32::MIN_POSITIVE));
+        assert!(ten_to_min32 > f64::from(f32::MIN_POSITIVE));
+        let ten_to_max32 = 10f64.powi(f32::MAX_10_EXP);
+        assert!(ten_to_max32 < f64::from(f32::MAX));
+        assert!(ten_to_max32 * 10.0 > f64::from(f32::MAX));
     }
 
     #[test]
@@ -1619,9 +1619,9 @@ mod test {
         let zero = f16::from_f32(0.0);
         let neg_zero = f16::from_f32(-0.0);
         let neg_one = f16::from_f32(-1.0);
-        let inf = f16::from_f32(core::f32::INFINITY);
-        let neg_inf = f16::from_f32(core::f32::NEG_INFINITY);
-        let nan = f16::from_f32(core::f32::NAN);
+        let inf = f16::from_f32(f32::INFINITY);
+        let neg_inf = f16::from_f32(f32::NEG_INFINITY);
+        let nan = f16::from_f32(f32::NAN);
 
         assert_eq!(f16::ONE, one);
         assert_eq!(f16::ZERO, zero);
@@ -1681,9 +1681,9 @@ mod test {
         let one = f16::from_f64(1.0);
         let zero = f16::from_f64(0.0);
         let neg_zero = f16::from_f64(-0.0);
-        let inf = f16::from_f64(core::f64::INFINITY);
-        let neg_inf = f16::from_f64(core::f64::NEG_INFINITY);
-        let nan = f16::from_f64(core::f64::NAN);
+        let inf = f16::from_f64(f64::INFINITY);
+        let neg_inf = f16::from_f64(f64::NEG_INFINITY);
+        let nan = f16::from_f64(f64::NAN);
 
         assert_eq!(f16::ONE, one);
         assert_eq!(f16::ZERO, zero);
@@ -1709,11 +1709,9 @@ mod test {
         let ln_10 = f16::from_f64(core::f64::consts::LN_10);
         let ln_2 = f16::from_f64(core::f64::consts::LN_2);
         let log10_e = f16::from_f64(core::f64::consts::LOG10_E);
-        // core::f64::consts::LOG10_2 requires rustc 1.43.0
-        let log10_2 = f16::from_f64(2f64.log10());
+        let log10_2 = f16::from_f64(core::f64::consts::LOG10_2);
         let log2_e = f16::from_f64(core::f64::consts::LOG2_E);
-        // core::f64::consts::LOG2_10 requires rustc 1.43.0
-        let log2_10 = f16::from_f64(10f64.log2());
+        let log2_10 = f16::from_f64(core::f64::consts::LOG2_10);
         let sqrt_2 = f16::from_f64(core::f64::consts::SQRT_2);
 
         assert_eq!(f16::E, e);
@@ -1730,6 +1728,7 @@ mod test {
         assert_eq!(f16::LN_10, ln_10);
         assert_eq!(f16::LN_2, ln_2);
         assert_eq!(f16::LOG10_E, log10_e);
+        assert_eq!(f16::LOG10_2, log10_2);
         assert_eq!(f16::LOG10_2, log10_2);
         assert_eq!(f16::LOG2_E, log2_e);
         assert_eq!(f16::LOG2_10, log2_10);
