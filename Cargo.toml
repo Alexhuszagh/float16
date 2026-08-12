@@ -24,11 +24,13 @@ exclude = [
 [features]
 default = ["std"]
 std = []
-
 [dependencies]
 cfg-if = "1.0.0"
 
 [build-dependencies]
+# NOTE: Due to some semver upgrading to a higher MSRV than our project
+# supports, after any dependency updates, make sure to use:
+#   cargo update -Z minimal-versions
 rustc_version = "0.4"
 
 [package.metadata.docs.rs]
