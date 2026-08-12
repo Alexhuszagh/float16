@@ -5,6 +5,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.1.6][v0.1.6] - 2024-12-21 <a name="0.1.6"></a>
+
+### Changed
+
+- Updated `rustc_version` to `0.4` (#15, by [@musicinmybrain])
+
+### Removed
+
+- `doc_auto_cfg` feature has been removed from docs.rs documentation due to removal of rust
+  feature.
+
 ## [0.1.5][v0.1.5] - 2024-12-21 <a name="0.1.5"></a>
 
 ### Removed
@@ -499,10 +510,12 @@ These were all changes for half, which `float16` is a fork of.
 [@eiz]: https://github.com/eiz
 [@comath]: https://github.com/comath
 [@mgottscho]: https://github.com/mgottscho
+[@musicinmybrain]: https://github.com/musicinmybrain
 
 <!-- Versions -->
 
 [Unreleased]: https://github.com/starkat99/half-rs/compare/v2.4.1...HEAD
+[v0.1.6]: https://github.com/Alexhuszagh/float16/compare/v0.1.5...v0.1.6
 [v0.1.5]: https://github.com/Alexhuszagh/float16/compare/v0.1.4...v0.1.5
 [v0.1.4]: https://github.com/Alexhuszagh/float16/compare/v0.1.3...v0.1.4
 [v0.1.3]: https://github.com/Alexhuszagh/float16/compare/v0.1.2...v0.1.3
