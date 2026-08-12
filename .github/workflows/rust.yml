@@ -1,6 +1,6 @@
 name: Rust
 
-on: [push, pull_request, workflow_dispatch]
+on: [pull_request, workflow_dispatch]
 
 env:
   CARGO_INCREMENTAL: 0
