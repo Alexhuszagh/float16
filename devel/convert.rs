@@ -1,6 +1,6 @@
-use std::{f32, f64, iter};
+use std::{f32, f64, hint, iter};
 
-use criterion::{black_box, criterion_group, criterion_main, Bencher, BenchmarkId, Criterion};
+use criterion::{criterion_group, criterion_main, Bencher, BenchmarkId, Criterion};
 use float16::*;
 
 const SIMD_LARGE_BENCH_SLICE_LEN: usize = 1024;
@@ -109,7 +109,10 @@ fn bench_slice_f32_to_f16(c: &mut Criterion) {
     c.bench_function(
         "HalfFloatSliceExt::convert_from_f32_slice/constants",
         |b: &mut Bencher<'_>| {
-            b.iter(|| black_box(&mut constant_buffer).convert_from_f32_slice(black_box(&constants)))
+            b.iter(|| {
+                hint::black_box(&mut constant_buffer)
+                    .convert_from_f32_slice(hint::black_box(&constants))
+            })
         },
     );
 
@@ -120,7 +123,9 @@ fn bench_slice_f32_to_f16(c: &mut Criterion) {
         .collect();
     let mut large_buffer = [f16::ZERO; SIMD_LARGE_BENCH_SLICE_LEN];
     c.bench_function("HalfFloatSliceExt::convert_from_f32_slice/large", |b: &mut Bencher<'_>| {
-        b.iter(|| black_box(&mut large_buffer).convert_from_f32_slice(black_box(&large)))
+        b.iter(|| {
+            hint::black_box(&mut large_buffer).convert_from_f32_slice(hint::black_box(&large))
+        })
     });
 }
 
@@ -142,7 +147,10 @@ fn bench_slice_f64_to_f16(c: &mut Criterion) {
     c.bench_function(
         "HalfFloatSliceExt::convert_from_f64_slice/constants",
         |b: &mut Bencher<'_>| {
-            b.iter(|| black_box(&mut constant_buffer).convert_from_f64_slice(black_box(&constants)))
+            b.iter(|| {
+                hint::black_box(&mut constant_buffer)
+                    .convert_from_f64_slice(hint::black_box(&constants))
+            })
         },
     );
 
@@ -153,7 +161,9 @@ fn bench_slice_f64_to_f16(c: &mut Criterion) {
         .collect();
     let mut large_buffer = [f16::ZERO; SIMD_LARGE_BENCH_SLICE_LEN];
     c.bench_function("HalfFloatSliceExt::convert_from_f64_slice/large", |b: &mut Bencher<'_>| {
-        b.iter(|| black_box(&mut large_buffer).convert_from_f64_slice(black_box(&large)))
+        b.iter(|| {
+            hint::black_box(&mut large_buffer).convert_from_f64_slice(hint::black_box(&large))
+        })
     });
 }
 
@@ -173,7 +183,9 @@ fn bench_slice_f16_to_f32(c: &mut Criterion) {
         f16::PI,
     ];
     c.bench_function("HalfFloatSliceExt::convert_to_f32_slice/constants", |b: &mut Bencher<'_>| {
-        b.iter(|| black_box(&constants).convert_to_f32_slice(black_box(&mut constant_buffer)))
+        b.iter(|| {
+            hint::black_box(&constants).convert_to_f32_slice(hint::black_box(&mut constant_buffer))
+        })
     });
 
     let large: Vec<_> = iter::repeat(0)
@@ -183,7 +195,7 @@ fn bench_slice_f16_to_f32(c: &mut Criterion) {
         .collect();
     let mut large_buffer = [0f32; SIMD_LARGE_BENCH_SLICE_LEN];
     c.bench_function("HalfFloatSliceExt::convert_to_f32_slice/large", |b: &mut Bencher<'_>| {
-        b.iter(|| black_box(&large).convert_to_f32_slice(black_box(&mut large_buffer)))
+        b.iter(|| hint::black_box(&large).convert_to_f32_slice(hint::black_box(&mut large_buffer)))
     });
 }
 
@@ -203,7 +215,9 @@ fn bench_slice_f16_to_f64(c: &mut Criterion) {
         f16::PI,
     ];
     c.bench_function("HalfFloatSliceExt::convert_to_f64_slice/constants", |b: &mut Bencher<'_>| {
-        b.iter(|| black_box(&constants).convert_to_f64_slice(black_box(&mut constant_buffer)))
+        b.iter(|| {
+            hint::black_box(&constants).convert_to_f64_slice(hint::black_box(&mut constant_buffer))
+        })
     });
 
     let large: Vec<_> = iter::repeat(0)
@@ -213,7 +227,7 @@ fn bench_slice_f16_to_f64(c: &mut Criterion) {
         .collect();
     let mut large_buffer = [0f64; SIMD_LARGE_BENCH_SLICE_LEN];
     c.bench_function("HalfFloatSliceExt::convert_to_f64_slice/large", |b: &mut Bencher<'_>| {
-        b.iter(|| black_box(&large).convert_to_f64_slice(black_box(&mut large_buffer)))
+        b.iter(|| hint::black_box(&large).convert_to_f64_slice(hint::black_box(&mut large_buffer)))
     });
 }
 
