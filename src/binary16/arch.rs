@@ -633,7 +633,11 @@ pub(crate) const fn f64_to_f16_fallback(value: f64) -> u16 {
     // Check for all exponent bits being set, which is Infinity or NaN
     if exp == 0x7FF0_0000_0000_0000u64 {
         // Set mantissa MSB for NaN (and also keep shifted mantissa bits)
-        let nan_bit = if man == 0 { 0u64 } else { 0x0200u64 };
+        let nan_bit = if man == 0 {
+            0u64
+        } else {
+            0x0200u64
+        };
         return ((sign >> 48) | 0x7C00u64 | nan_bit | (man >> 42)) as u16;
     }
 
