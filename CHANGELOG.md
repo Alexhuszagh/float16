@@ -5,6 +5,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed support for LoongArch, including intrinsic use and the fallback (#28, reported by [@fanta0625] in #18)
+
 ## [0.1.6][v0.1.6] - 2024-12-21 <a name="0.1.6"></a>
 
 ### Changed
@@ -511,6 +515,7 @@ These were all changes for half, which `float16` is a fork of.
 [@comath]: https://github.com/comath
 [@mgottscho]: https://github.com/mgottscho
 [@musicinmybrain]: https://github.com/musicinmybrain
+[@fanta0625]: https://github.com/fanta0625
 
 <!-- Versions -->
 
