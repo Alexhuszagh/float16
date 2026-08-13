@@ -1,3 +1,6 @@
+#![cfg(has_loongarch_intrinsics)]
+#![allow(unknown_lints)]
+
 #[cfg(target_arch = "loongarch64")]
 use core::arch::loongarch64::{lsx_vfcvt_h_s, lsx_vfcvtl_s_h, m128, m128i};
 use core::{mem::MaybeUninit, ptr};

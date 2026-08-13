@@ -60,8 +60,10 @@
 //! [`std`]: https://doc.rust-lang.org/std/
 //! [`binary16`]: https://en.wikipedia.org/wiki/Half-precision_floating-point_format
 //! [`bfloat16`]: https://en.wikipedia.org/wiki/Bfloat16_floating-point_format
+
 #![allow(clippy::verbose_bit_mask, clippy::cast_lossless, unexpected_cfgs)]
 #![cfg_attr(not(feature = "std"), no_std)]
+#![cfg_attr(all(target_arch = "loongarch64", has_loongarch_intrinsics), feature(stdarch_loongarch))]
 #![doc(html_root_url = "https://docs.rs/float16/0.1.6")]
 #![doc(test(attr(deny(warnings), allow(unused))))]
 // Until updated to use newly stabilized `from_bits`, disable new lint warning about the transmutes

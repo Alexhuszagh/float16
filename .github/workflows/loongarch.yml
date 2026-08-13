@@ -1,0 +1,64 @@
+name: Rust
+
+on: [pull_request, workflow_dispatch]
+
+env:
+  TOOLCHAIN_HOME: /opt/cross-tools
+  TARGET: loongarch64-unknown-linux-gnu
+  DEBIAN_FRONTEND: noninteractive
+
+jobs:
+  loongarch:
+    name: LoongArch64
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.rust == 'nightly' }}
+    strategy:
+      matrix:
+        rust:
+          - stable
+          - nightly
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Linux Install Rust toolchain
+      uses: dtolnay/rust-toolchain@master
+      with:
+        toolchain: ${{ matrix.rust }}
+        targets: "${TARGET}"
+
+    - name: Install Cross Toolchain
+      run: |
+        # NOTE: Update this periodically
+        release="2025.08.08"
+        filename="loongarch64.tar.xz"
+        url="https://github.com/loongson/build-tools/releases/download/${release}/x86_64-cross-tools-loongarch64-binutils_2.45-gcc_15.1.0-glibc_2.42.tar.xz"
+
+        wget "${url}" -O "${filename}"
+        tar -xf "${filename}"
+        sudo mv "cross-tools" "${TOOLCHAIN_HOME}"
+        rm "${filename}"
+
+        "${TOOLCHAIN_HOME}/bin/loongarch64-unknown-linux-gnu-gcc" --version
+
+    - name: Install Qemu Runner
+      run: |
+        sudo apt update && sudo apt install qemu-user -y --no-install-recommends
+        qemu-loongarch64 --version
+
+    - name: Build and Test Library
+      run: |
+        export CC_loongarch64_unknown_linux_gnu="${TOOLCHAIN_HOME}/bin/loongarch64-unknown-linux-gnu-gcc"
+        export CXX_loongarch64_unknown_linux_gnu="${TOOLCHAIN_HOME}/bin/loongarch64-unknown-linux-gnu-g++"
+        export AR_loongarch64_unknown_linux_gnu="${TOOLCHAIN_HOME}/bin/loongarch64-unknown-linux-gnu-gcc-ar"
+        export CARGO_TARGET_LOONGARCH64_UNKNOWN_LINUX_GNU_LINKER="${TOOLCHAIN_HOME}/bin/loongarch64-unknown-linux-gnu-gcc"
+        export CARGO_TARGET_LOONGARCH64_UNKNOWN_LINUX_GNU_RUNNER="qemu-loongarch64 -L ${TOOLCHAIN_HOME}/target"
+
+        # NOTE: The qemu runner does not seem to work for this architecture.
+        cargo build --target "${TARGET}"
+        cargo test --target "${TARGET}"
+
+        cd devel
+        cargo build --target "${TARGET}"
+        cargo test --target "${TARGET}"

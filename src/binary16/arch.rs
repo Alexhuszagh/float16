@@ -33,6 +33,7 @@ macro_rules! convert_fn {
                 $aarch64
             }
             else if #[cfg(all(
+                has_loongarch_intrinsics,
                 target_arch = "loongarch64",
                 target_feature = "lsx"
             ))] {
@@ -65,6 +66,7 @@ macro_rules! convert_fn {
                 }
             }
             else if #[cfg(all(
+                has_loongarch_intrinsics,
                 feature = "std",
                 target_arch = "loongarch64",
             ))] {
