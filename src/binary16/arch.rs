@@ -624,33 +624,29 @@ pub(crate) const fn f32_to_f16_fallback(value: f32) -> u16 {
 
 #[inline]
 pub(crate) const fn f64_to_f16_fallback(value: f64) -> u16 {
-    // Convert to raw bytes, truncating the last 32-bits of mantissa; that precision
-    // will always be lost on half-precision.
     // TODO: Replace mem::transmute with to_bits() once to_bits is const-stabilized
     let val: u64 = unsafe { mem::transmute::<f64, u64>(value) };
-    let x = (val >> 32) as u32;
 
-    // Extract IEEE754 components
-    let sign = x & 0x8000_0000u32;
-    let exp = x & 0x7FF0_0000u32;
-    let man = x & 0x000F_FFFFu32;
+    // Extract IEEE754 components from full 64-bit representation
+    let sign = val & 0x8000_0000_0000_0000u64;
+    let exp = val & 0x7FF0_0000_0000_0000u64;
+    let man = val & 0x000F_FFFF_FFFF_FFFFu64;
 
     // Check for all exponent bits being set, which is Infinity or NaN
-    if exp == 0x7FF0_0000u32 {
-        // Set mantissa MSB for NaN (and also keep shifted mantissa bits).
-        // We also have to check the last 32 bits.
-        let nan_bit = if man == 0 && (val as u32 == 0) {
-            0
+    if exp == 0x7FF0_0000_0000_0000u64 {
+        // Set mantissa MSB for NaN (and also keep shifted mantissa bits)
+        let nan_bit = if man == 0 {
+            0u64
         } else {
-            0x0200u32
+            0x0200u64
         };
-        return ((sign >> 16) | 0x7C00u32 | nan_bit | (man >> 10)) as u16;
+        return ((sign >> 48) | 0x7C00u64 | nan_bit | (man >> 42)) as u16;
     }
 
     // The number is normalized, start assembling half precision version
-    let half_sign = sign >> 16;
+    let half_sign = (sign >> 48) as u32;
     // Unbias the exponent, then bias for half precision
-    let unbiased_exp = ((exp >> 20) as i64) - 1023;
+    let unbiased_exp = ((exp >> 52) as i64) - 1023;
     let half_exp = unbiased_exp + 15;
 
     // Check for exponent overflow, return +infinity
@@ -661,15 +657,16 @@ pub(crate) const fn f64_to_f16_fallback(value: f64) -> u16 {
     // Check for underflow
     if half_exp <= 0 {
         // Check mantissa for what we can do
-        if 10 - half_exp > 21 {
+        if 14 - half_exp > 24 {
             // No rounding possibility, so this is a full underflow, return signed zero
             return half_sign as u16;
         }
         // Don't forget about hidden leading mantissa bit when assembling mantissa
-        let man = man | 0x0010_0000u32;
-        let mut half_man = man >> (11 - half_exp);
+        let man = man | 0x0010_0000_0000_0000u64;
+        let shift = 43 - half_exp; // shift amount to get to half mantissa position
+        let mut half_man = (man >> shift) as u32;
         // Check for rounding (see comment above functions)
-        let round_bit = 1 << (10 - half_exp);
+        let round_bit = 1u64 << (shift - 1);
         if (man & round_bit) != 0 && (man & (3 * round_bit - 1)) != 0 {
             half_man += 1;
         }
@@ -679,9 +676,9 @@ pub(crate) const fn f64_to_f16_fallback(value: f64) -> u16 {
 
     // Rebias the exponent
     let half_exp = (half_exp as u32) << 10;
-    let half_man = man >> 10;
+    let half_man = (man >> 42) as u32;
     // Check for rounding (see comment above functions)
-    let round_bit = 0x0000_0200u32;
+    let round_bit = 0x0000_0200_0000_0000u64;
     if (man & round_bit) != 0 && (man & (3 * round_bit - 1)) != 0 {
         // Round it
         ((half_sign | half_exp | half_man) + 1) as u16

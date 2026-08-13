@@ -37,3 +37,14 @@ fn qc_roundtrip_f16_f64_is_identity(bits: u16) -> bool {
         f.to_bits() == roundtrip.to_bits()
     }
 }
+
+#[test]
+fn test_issue_17() {
+    let f = 2.9802322387695312e-8;
+    assert_eq!(f16::from_f64(f).to_bits(), 0);
+
+    let f = 2.980232238769532e-8;
+    let as16 = f16::from_f64(f);
+    assert_eq!(as16.to_bits(), 1);
+    assert_eq!(as16.to_f64(), 5.960464477539063e-8);
+}
