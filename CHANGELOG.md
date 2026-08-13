@@ -5,13 +5,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.1.7][v0.1.7] - 2026-08-13 <a name="0.1.7"></a>
+
 ### Fixed
 
 - Fixed support for LoongArch, including intrinsic use and the fallback (#28, reported by [@fanta0625] in #18)
 - Fixed `f16` to `f64` subnormal rounding (#16 by [@xcb3d])
 - Fixed types in the docs ([a9b5380](https://github.com/VoidStarKat/half-rs/commit/a9b5380) by [@reddaisyy])
 
-## [0.1.6][v0.1.6] - 2024-12-21 <a name="0.1.6"></a>
+## [0.1.6][v0.1.6] - 2026-08-13 <a name="0.1.6"></a>
 
 ### Changed
 
@@ -524,6 +526,7 @@ These were all changes for half, which `float16` is a fork of.
 <!-- Versions -->
 
 [Unreleased]: https://github.com/starkat99/half-rs/compare/v2.4.1...HEAD
+[v0.1.7]: https://github.com/Alexhuszagh/float16/compare/v0.1.6...v0.1.7
 [v0.1.6]: https://github.com/Alexhuszagh/float16/compare/v0.1.5...v0.1.6
 [v0.1.5]: https://github.com/Alexhuszagh/float16/compare/v0.1.4...v0.1.5
 [v0.1.4]: https://github.com/Alexhuszagh/float16/compare/v0.1.3...v0.1.4
